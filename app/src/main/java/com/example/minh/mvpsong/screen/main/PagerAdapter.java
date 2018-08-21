@@ -4,26 +4,28 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.minh.mvpsong.screen.show.FragmentOne;
+import com.example.minh.mvpsong.screen.songs.SongsFragment;
 import com.example.minh.mvpsong.ultil.Constant;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    public PagerAdapter(FragmentManager fm) {
+
+    private FragmentTwo mFragmentTwo;
+    private SongsFragment mFragmentOne;
+
+    public PagerAdapter(FragmentManager fm, SongsFragment fragmentOne, FragmentTwo fragmentTwo) {
         super(fm);
+        this.mFragmentOne = fragmentOne;
+        this.mFragmentTwo = fragmentTwo;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment frag = null;
         switch (position) {
             case Constant.SONG_LIST:
-                frag = new FragmentOne();
-                break;
-            case Constant.SONG_PLAY:
-                frag = new FragmentTwo();
-                break;
+                return mFragmentOne;
+            default:
+                return mFragmentTwo;
         }
-        return frag;
     }
 
     @Override
